@@ -288,10 +288,10 @@ def main(argv):
 
             # Copy across the files that may not be in all of the docker images
             try:
-                subprocess.check_output(['docker', 'exec', '-t', cid, 'mkdir', '-p', '/home/zap/.ZAP_D/scripts/scripts/httpsender/'])
-                cp_to_docker(cid, 'scripts/scripts/httpsender/Alert_on_HTTP_Response_Code_Errors.js', '/home/zap/.ZAP_D/')
-                cp_to_docker(cid, 'scripts/scripts/httpsender/Alert_on_Unexpected_Content_Types.js', '/home/zap/.ZAP_D/')
-                cp_to_docker(cid, 'policies/API-Minimal.policy', '/home/zap/.ZAP_D/')
+                subprocess.check_output(['docker', 'exec', '-t', cid, 'mkdir', '-p', '/var/lib/jenkins/.ZAP_D/scripts/scripts/httpsender/'])
+                cp_to_docker(cid, 'scripts/scripts/httpsender/Alert_on_HTTP_Response_Code_Errors.js', '/var/lib/jenkins/.ZAP_D/')
+                cp_to_docker(cid, 'scripts/scripts/httpsender/Alert_on_Unexpected_Content_Types.js', '/var/lib/jenkins/.ZAP_D/')
+                cp_to_docker(cid, 'policies/API-Minimal.policy', '/var/lib/jenkins/.ZAP_D/')
                 if target_file:
                     cp_to_docker(cid, target_file, '/zap/')
 
@@ -315,9 +315,9 @@ def main(argv):
                 logging.error('Failed to load context file ' + context_file + ' : ' + res)
 
         # Enable scripts
-        zap.script.load('Alert_on_HTTP_Response_Code_Errors.js', 'httpsender', 'Oracle Nashorn', '/home/zap/.ZAP_D/scripts/scripts/httpsender/Alert_on_HTTP_Response_Code_Errors.js')
+        zap.script.load('Alert_on_HTTP_Response_Code_Errors.js', 'httpsender', 'Oracle Nashorn', '/var/lib/jenkins/.ZAP_D/scripts/scripts/httpsender/Alert_on_HTTP_Response_Code_Errors.js')
         zap.script.enable('Alert_on_HTTP_Response_Code_Errors.js')
-        zap.script.load('Alert_on_Unexpected_Content_Types.js', 'httpsender', 'Oracle Nashorn', '/home/zap/.ZAP_D/scripts/scripts/httpsender/Alert_on_Unexpected_Content_Types.js')
+        zap.script.load('Alert_on_Unexpected_Content_Types.js', 'httpsender', 'Oracle Nashorn', '/var/lib/jenkins/.ZAP_D/scripts/scripts/httpsender/Alert_on_Unexpected_Content_Types.js')
         zap.script.enable('Alert_on_Unexpected_Content_Types.js')
 
         # Import the API defn
